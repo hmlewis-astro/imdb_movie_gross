@@ -1,7 +1,7 @@
 # Project Proposal
 ## Interpreting the impact of lead-actor demographics on film revenue
 
-Based on a [study of the top grossing US films of 2020](https://womenintvfilm.sdsu.edu/research/), The Center for the Study of Women in Television and Film found that there is a significant disparity in the _number_ of female versus male protagonists in movies released during 2020, and a significant difference in the ages of those leads (depending on their gender). Here, we aim to determine what (if any) impact these differences in actor demographics (i.e., gender and age) have on the lifetime gross of a movie.
+Based on a [study of the top grossing US films of 2020](https://womenintvfilm.sdsu.edu/research/), The Center for the Study of Women in Television and Film found that there is a significant disparity in the _number of female versus male protagonists_ in movies released during 2020, and a significant difference in the _ages of those actors_. Here, we aim to determine what (if any) impact these differences in actor demographics (i.e., gender and age) have on the lifetime gross of a movie.
 
 
 ### Question:
