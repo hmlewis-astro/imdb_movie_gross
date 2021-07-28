@@ -1,9 +1,10 @@
 # Project Proposal
 ## Interpreting the impact of lead-actor demographics on film revenue
 
-
+Based on a [study of the top grossing US films of 2020](https://womenintvfilm.sdsu.edu/research/), The Center for the Study of Women in Television and Film found that there is a significant disparity in the number of female versus male protagonists in movies released during 2020, and a significant difference in the ages of those leads depending on their gender. Here, we aim to determine what (if any) impact these differences in actor demographics have on the gross of a particular movie.
 
 ### Question:
+In this project, we seek to **determine the impact of lead-actor demographics** (primarily, gender and age) **on worldwide, lifetime movie gross** of some of the most successful movies of all time. The impact of these specific features will be interpreted from a linear regression model built to predict the lifetime revenues (i.e., target) of the top 1000+ grossing movies of all time based on e.g., the budget, rating, run time, genre, and actor demographics (i.e., features) for each movie.
 
 
 ### Data description:
@@ -25,3 +26,5 @@ The linear regression model in `scikit-learn` (or `statsmodel`) will then be use
 We will use the matplotlib package to create visualizations of the resulting model.
 
 ### MVP:
+
+The minimal viable product (MVP) for this project will likely be a simple linear regression model including just a few features (e.g., lead-actor demographics, budget, and opening weekend gross), so that we can begin to understand what the most important features will be in predicting the lifetime gross of a movie. Given sufficient time, we may build separate models for male versus female lead-actors, to see how the coefficients change between these groups.
