@@ -1,0 +1,6 @@
+# Ignore temp files from other editors
+~*
+
+# Ignore pycache
+*.pyc
+.ipynb_checkpoints/
