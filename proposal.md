@@ -22,7 +22,7 @@ Given the name and IMDb webpage link for the lead-actor of each film, we will sc
 For each movie (i.e., an individual sample of analysis), our dataset will therefore include: title, world and domestic/foreign gross, domestic opening gross, budget, MPAA rating, run time, genre, lead-actor age (at the time of release), height, and gender. Here, the total world gross will act as the target, and all other observations (excepting the movie title) will act as the features in the model.
 
 ### Tools:
-To scrape the data, the `requests` and `BeautifulSoup` packages in Python will be utilized. The scraped data will be stored in a comma-separated values file&emdash;this file will continue to be added to as more data is scraped&mdash;and will be read in to python and manipulated using the `pandas` package. The `pandas` package will also be used for initial exploratory data analysis.
+To scrape the data, the `requests` and `BeautifulSoup` packages in Python will be utilized. The scraped data will be stored in a comma-separated values file&mdash;this file will continue to be added to as more data is scraped&mdash;and will be read in to python and manipulated using the `pandas` package. The `pandas` package will also be used for initial exploratory data analysis.
 
 The linear regression model in `scikit-learn` will then be used to interpret the importance of lead-actor gender and age in predicting worldwide, lifetime movie gross.
 
