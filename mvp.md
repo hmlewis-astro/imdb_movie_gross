@@ -16,4 +16,4 @@ The next figure (center) shows the residuals, and the last figure (right) shows 
 </p>
 
 
-These results show that a significant proportion of the variance is explained by the current model, however, I hope to improve the R<sup>2</sup> by (1) log-scaling some of the features, (2) incorporating the studio and movie genres as dummy variables, and (3) testing LASSO and Ridge regression models to find the .
+These results show that a significant proportion of the variance is explained by the current model; however, I hope to improve the R<sup>2</sup> by (1) log-scaling some of the features, (2) incorporating the studio and movie genres as dummy variables, and (3) testing LASSO and Ridge regression models to find the most important features in the model. Because I plan to use the resulting model to interpret the impact of lead actor gender and age on lifetime movie gross, I am leaning towards using Ridge regression to avoid setting any of the coefficients of interest (i.e., lead actor age or gender) equal to 0.
