@@ -10,9 +10,9 @@ To begin building a regression model, I carry out a k-fold cross-validation (k=5
 The next figure (center) shows the residuals, and the last figure (right) shows the q-q plot. The q-q plot indicates that the predicted values are heavy-tailed, meaning that, in it's current form, the model does not correctly summarize the underlying relationship between the selected features and the target. To improve the model, I plan to transform the monetary target and features (i.e., domestic opening weekend gross, budget) to log scale.
 
 <p float="center">
-  <img src="figures/lr_basic.png" width="350" />
-  <img src="figures/lr_basic_resid.png" width="350" />
-  <img src="figures/lr_basic_qq.png" width="350" />
+  <img src="figures/lr_basic.png" width="320" />
+  <img src="figures/lr_basic_resid.png" width="320" />
+  <img src="figures/lr_basic_qq.png" width="320" />
 </p>
 
 
