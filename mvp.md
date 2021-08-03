@@ -9,10 +9,10 @@ To begin building a regression model, I carry out a k-fold cross-validation (k=5
 
 The next figure (center) shows the residuals, and the last figure (right) shows the q-q plot. The q-q plot indicates that the predicted values are heavy-tailed, meaning that, in it's current form, the model cannot correctly summarize the underlying relationship. If this is true for your data, among other recommendations from Duke and the Additional Resources listed at bottom, you can transform your data to make it more linear using log-transformations or other means, or you may have to utilize a non-linear model on the dataset..
 
-<p float="left">
-  <img src="figures/lr_basic.png" width="200" />
-  <img src="figures/lr_basic_resid.png" width="200" />
-  <img src="figures/lr_basic_qq.png" width="200" />
+<p float="center">
+  <img src="figures/lr_basic.png" width="300" />
+  <img src="figures/lr_basic_resid.png" width="300" />
+  <img src="figures/lr_basic_qq.png" width="300" />
 </p>
 
 
