@@ -44,9 +44,9 @@ To expand the model, I add lead actor gender and age as features, as well as dum
 
 
 #### Interpretation
-The significant coefficients in the final model (_p_ < 0.01) are the domestic opening weekend gross (and its square), budget, the Rotten Tomatoes audience and Tomatometer scores, and whether the movie falls into one of the following genre categories: adventure, animation, or sci-fi. Though the lead actor gender and age have negative coefficients (i.e., the lifetime movie gross decreases for female leads and as lead age increases) in the final model, the coefficients are not significantly different from a coefficient of 0. That is, the gender and age of the lead actor has no significant impact on predicting the worldwide, lifetime gross of a movie.
+The significant coefficients in the final model (_p_ < 0.01) are the domestic opening weekend gross (and its square), budget, the Rotten Tomatoes audience and Tomatometer scores, and whether the movie falls into one of the following genre categories: adventure, animation, or sci-fi. Though the lead actor gender has a negative coefficient (i.e., the lifetime movie gross decreases for female leads) in the final model, the coefficients for both lead actor gender and age are not significantly different from a coefficient of 0. That is, the gender and age of the lead actor has no significant impact on predicting the worldwide, lifetime gross of a movie.
 
-The figure below shows the relative feature (coefficient) importance of the significant features, as well as the lead actor gender and age.
+The figure below shows the relative feature (coefficient) importance of the significant features (_p_ < 0.01) in the final model, as well as the lead actor gender and age.
 
 <p align="center">
 <img src="https://github.com/hmlewis-astro/imdb_movie_gross/blob/main/figures/ridge_final_coef_studio_genre_trim_significant_include_demographics.png" width="600" />
