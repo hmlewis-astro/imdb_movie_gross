@@ -16,7 +16,7 @@ This project utilizes data scraped, using `requests` and `BeautifulSoup`, from B
 Again, the data required to address this question was scraped from Box Office Mojo, IMDb, and Rotten Tomatoes. The target and features, detailed below, were scraped for 6000 movies, though some features were not available for all movies, so a significant number of these 6000 movies had to be removed from the dataset.
 
 #### Box Office Mojo
-From [Box Office Mojo](https://www.boxofficemojo.com/chart/ww_top_lifetime_gross/?offset=0), I scraped a list of the 6000 movies with the highest worldwide, lifetime grosses. This website provides the rank and title of each movie, as well as the worldwide, domestic, and foreign lifetime grosses. The ratio of the domestic to foreign gross is used to determine whether a movie was produced domestically; if international gross was greater than ~6&times; the domestic gross, the movie was assigned to the international film category. Box Office Mojo also provides the domestic opening gross, budget, release date, MPAA rating, run time, and genre for each movie, as well as the name for the lead-actor (i.e., top billed actor).
+From [Box Office Mojo](https://www.boxofficemojo.com/chart/ww_top_lifetime_gross/?offset=0), I scraped a list of the 6000 movies with the highest worldwide, lifetime grosses. This website provides the rank and title of each movie, as well as the worldwide, domestic, and foreign lifetime grosses. The ratio of the domestic to foreign gross is used to determine whether a movie was produced domestically; if international gross was greater than ~6&times; the domestic gross, the movie was assigned to the international film category. Box Office Mojo also provides the domestic opening gross, budget, release date, MPAA rating, run time, studio, and genre for each movie, as well as the name for the lead-actor (i.e., top billed actor).
 
 #### IMDb
 Given the name for the lead-actor of each movie, I also scrape from the actor's IMDb webpage a basic bio, including their birth date, height, and gender. Their birth dates will be used (along with the release date of each movie) to calculate their age at the time of release.
@@ -25,12 +25,10 @@ Given the name for the lead-actor of each movie, I also scrape from the actor's 
 Given the title of each movie, I also scrape the audience score and Tomatometer score from [Rotten Tomatoes](https://www.rottentomatoes.com)
 
 #### Data Summary: Target and Features
-For each movie (i.e., an individual sample of analysis), our dataset will therefore include: title, world and domestic/foreign gross, domestic opening gross, budget, MPAA rating, run time, genre, lead-actor age (at the time of release), height, and gender. Here, the total world gross will act as the target, and all other observations (excepting the movie title) will act as the features in the model.
+For each movie (i.e., an individual sample of analysis), our dataset will therefore include:
 
-| Target:      | worldwide lifetime gross |
-| :---        |     ---: |
-| Features:      | budget       |
-|       | genre       |
+**Target**: worldwide lifetime gross <br>
+**Features**: domestic lifetime gross, international lifetime gross, studio, domestic opening gross, budget, release date, MPAA rating, run time, genre, lead name, lead birth date, lead height, lead gender, Rotten Tomatoes audience and Tomatometer scores
 
 
 ### Algorithms
@@ -42,14 +40,14 @@ Given the SQL database containing MTA turnstile data, I created a new table with
 
 I then calculated the time passed (in seconds) and the change in the turnstile `entries` counts between each reading; again, readings occur roughly every four hours. Here, there are two peculiarities in the data: (1) some turnstiles are counting backwards and (2) turnstiles appear to reset, leading to apparent increases in `entries` on the order of 10<sup>5</sup>-10<sup>7</sup> riders over just a few hours. To deal with these, I (1) always take the absolute value of the number of entries between measurements and (2) set an upper limit of 3 entries per turnstile per second. The later of these allows for a dynamic upper-limit to be set for each observation, depending on the time between measurements, rather than setting a single upper-limit.
 
-#### Aggregation
+#### Baselining
 The cleaned MTA data are then aggregated by station and linename, such that the net entries over the observed three month period can be derived. From the net entries, a "crowd index" in the range of 1 to 10 is calculated for each station, 10 being the most crowded, 1 being the least.
 
 The MTA and heat data are then joined together based on the spatial location of each station.
 
 By combining the derived "heat index" and "crowd index" for each station, I calculate a "risk index" (again, scaled from 1 to 10, with 10 being high risk) for heat-illness at each station.
 
-#### Visualization
+#### Expanded model
 Maps of the stations colored by the various indices presented here are created.
 
 Example: A map of New York City's subway stations, where each station location is colored by its "risk index", which considers heat-illness risk due to both high heat and large crowds. Redder colors indicate higher-risk stations.
@@ -58,18 +56,15 @@ Example: A map of New York City's subway stations, where each station location i
 <img src="https://github.com/hmlewis-astro/mta_analysis/blob/main/heat_data/data/output/analysis_out/final/plots/new-york-station-risk-index.png" width="600" />
 </p>
 
+#### Interpretation
+
 
 ### Tools
-- SQLAlchemy for querying SQL database in Python
-- Mapshapper (employed by pre-packaged analysis algorithms by the USGS) for creating and altering geographic databases
-- Pandas, GeoPandas, and Numpy for data analysis
-- GeoPandas for handling and plotting geographic data
-- Matplotlib and Tableau for plotting and interactive visualizations
+- Requests and BeautifulSoup for web scraping
+- Pandas and Numpy for data analysis and exploration
+- Scikit-learn (including functions from `preprocessing`, `model_selection`, `linear_model`, and `metrics`) for creating dummy variables, building, training, and testing the model
+- Matplotlib and Seaborn for plotting and visualizations
 
 ### Communication
 
-In addition to the slides and visuals presented here, the Tableau dashboard [NYC MTA Heat](https://public.tableau.com/views/NYCMTAHeatAnalysis/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link) will be included in a forthcoming blog post to be shared on my (work-in-progress) GitHub Pages [website](https://hmlewis-astro.github.io/).
-
-<p align="center">
-<img src="https://github.com/hmlewis-astro/mta_analysis/blob/main/final_pres/NYC_MTA_heat_dashboard.png" width="512" />
-</p>
+In addition to the slides and visuals presented here, an expanded version of this write-up will be included as a blog post on my GitHub Pages [website](https://hmlewis-astro.github.io/).
