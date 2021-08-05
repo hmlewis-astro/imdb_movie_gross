@@ -49,7 +49,7 @@ The significant coefficients in the final model (_p_ < 0.01) are the domestic op
 The figure below shows the relative feature (coefficient) importance of the significant features, as well as the lead actor gender and age.
 
 <p align="center">
-<img src="https://github.com/hmlewis-astro/imdb_movie_gross/blob/main/figures/ridge_final_coef_studio_genre_trim_significant_include_demographics.png" width="420" />
+<img src="https://github.com/hmlewis-astro/imdb_movie_gross/blob/main/figures/ridge_final_coef_studio_genre_trim_significant_include_demographics.png" width="600" />
 </p>
 
 ### Tools
