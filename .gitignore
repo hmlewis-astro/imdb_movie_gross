@@ -8,3 +8,6 @@
 
 # Ignore data backups
 data_backup/
+
+# Ignore powerpoint files
+final_pres/*.pptx
