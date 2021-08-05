@@ -4,20 +4,33 @@
 
 ### Abstract
 
-The goal of this project was to determine the impact of lead-actor demographics (specifically, gender and age) on worldwide, lifetime movie gross of some of the most successful movies of all time. [Historically](https://womenintvfilm.sdsu.edu/research/), female protagonists&ndash;particularly, female protagonists portrayed by actors over the age of ~35&ndash;are significantly underrepresented in movies; here, I aim to determine what (if any) impact these differences in actor demographics (i.e., gender and age) have on the lifetime gross of a movie. To do so, I build a ridge regression model that uses as features the domestic opening weekend gross (and its square), budget, the Rotten Tomatoes audience and Tomatometer scores, the lead actor gender and age, the studio that produced the movie, and the genre of the movie to predict the worldwide, lifetime gross of a movie. Scored on the test data, the resulting model has an R<sup>2</sup> = 0.795 and a mean absolute error of $63.4 million. The significant features in the model (i.e., those coefficients with _p_-values < 0.01) are the domestic opening weekend gross (and its square), budget, the Rotten Tomatoes audience and Tomatometer scores, and whether the movie falls into one of the following genre categories: adventure, animation, or sci-fi. Of note, the lead actor gender and age do not have a significant impact on predicting lifetime movie gross.
+The goal of this project was to determine the impact of lead-actor demographics (specifically, gender and age) on worldwide, lifetime movie gross of some of the most successful movies of all time. [Historically](https://womenintvfilm.sdsu.edu/research/), female protagonists&mdash;particularly, female protagonists portrayed by actors over the age of ~35&mdash;are significantly underrepresented in movies; here, I aim to determine what (if any) impact these differences in actor demographics (i.e., gender and age) have on the lifetime gross of a movie. To do so, I build a ridge regression model that uses as features the domestic opening weekend gross (and its square), budget, the Rotten Tomatoes audience and Tomatometer scores, the lead actor gender and age, the studio that produced the movie, and the genre of the movie to predict the worldwide, lifetime gross of a movie. Scored on the test data, the resulting model has an R<sup>2</sup> = 0.795 and a mean absolute error of $63.4 million. The significant features in the model (i.e., those coefficients with _p_-values < 0.01) are the domestic opening weekend gross (and its square), budget, the Rotten Tomatoes audience and Tomatometer scores, and whether the movie falls into one of the following genre categories: adventure, animation, or sci-fi. Of note, the lead actor gender and age do not have a significant impact on predicting lifetime movie gross.
 
 
 ### Design
 
-This project comes at the request of the New York City Department of Health; for an upcoming press release concerning summer heat, the Department wants to compile a list of MTA stations that pose the greatest risk to people at high-risk for heat-related illnesses. Because heat stress and heat-related illnesses are exacerbated by conditions that are incredibly crowded (in addition to extremely hot), they want to understand which stations are most impacted by _both of these factors_ (i.e., heat and crowds). By providing daily subway users with this information, the Department hopes to prevent a spike in heat-related illnesses this summer, and allow MTA riders to make informed decisions regarding their subway use during future heat waves.
+This project utilizes data scraped, using `requests` and `BeautifulSoup`, from Box Office Mojo, IMDb, and Rotten Tomatoes for movies with the highest worldwide, lifetime grosses. I aim to determine the impact of lead-actor gender and age on worldwide, lifetime movie gross of the top 6000 (by gross) movies of all time. Whether or not lead actor gender and age are significant factors in predicting movie gross, ultimately, I hope these results will in some way influence the number of movies released that are led by a more gender and age-diverse range of actors.
+
 
 ### Data
+Again, the data required to address this question was scraped from Box Office Mojo, IMDb, and Rotten Tomatoes. The target and features, detailed below, were scraped for 6000 movies, though some features were not available for all movies, so a significant number of these 6000 movies had to be removed from the dataset.
 
-#### Heat data
-Satellite imagery of New York City (with <1% cloud cover) was captured during Summer 2018 by the NASA Landsat 8 satellite. This image, downloaded from [Earth Explorer](https://earthexplorer.usgs.gov/), captured a roughly 185 km by 180 km (114 mi by 112 mi) image of the land area in 11 spectral bands (file size ~70 MB); for each image pixel, brightness measurements in multiple bands can be combined (via known relations; see Algorithms section below) to derive precise land temperature measurements. Surface temperatures can be estimated with 30 meter spatial resolution.
+#### Box Office Mojo
+From [Box Office Mojo](https://www.boxofficemojo.com/chart/ww_top_lifetime_gross/?offset=0), I scraped a list of the 6000 movies with the highest worldwide, lifetime grosses. This website provides the rank and title of each movie, as well as the worldwide, domestic, and foreign lifetime grosses. The ratio of the domestic to foreign gross is used to determine whether a movie was produced domestically; if international gross was greater than ~6&times; the domestic gross, the movie was assigned to the international film category. Box Office Mojo also provides the domestic opening gross, budget, release date, MPAA rating, run time, and genre for each movie, as well as the name for the lead-actor (i.e., top billed actor).
 
-#### Crowd-size data
-The MTA publishes weekly turnstile data that provides transit ridership as measured by turnstile entries and exits, with readings taken approximately every 4 hours. Though data is available going back to 2010, the database utilized here contains ridership data only for the year of 2018 (to correspond with the captured satellite imagery; ~10.3M rows, file size ~800 MB). Geolocations (i.e., latitude, longitude coordinates) for most MTA stations are collected from a publicly available [datafile](https://github.com/chriswhong/nycturnstiles/blob/master/geocoded.csv), though some stations were added by-hand to the [file available in this repo](https://github.com/hmlewis-astro/mta_analysis/blob/main/geocoded.csv).
+#### IMDb
+Given the name for the lead-actor of each movie, I also scrape from the actor's IMDb webpage a basic bio, including their birth date, height, and gender. Their birth dates will be used (along with the release date of each movie) to calculate their age at the time of release.
+
+#### Rotten Tomatoes
+Given the title of each movie, I also scrape the audience score and Tomatometer score from [Rotten Tomatoes](https://www.rottentomatoes.com)
+
+#### Data Summary: Target and Features
+For each movie (i.e., an individual sample of analysis), our dataset will therefore include: title, world and domestic/foreign gross, domestic opening gross, budget, MPAA rating, run time, genre, lead-actor age (at the time of release), height, and gender. Here, the total world gross will act as the target, and all other observations (excepting the movie title) will act as the features in the model.
+
+| Target:      | worldwide lifetime gross |
+| :---        |     ---: |
+| Features:      | budget       |
+|       | genre       |
 
 
 ### Algorithms
