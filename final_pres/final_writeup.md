@@ -1,12 +1,10 @@
 # Project Write-Up
-## Avoiding heat-illness in New York City's busiest and hottest MTA stations
+## Interpreting the impact of lead-actor gender and age on film revenue
 
 
 ### Abstract
 
-The goal of this project was to determine the impact of lead-actor demographics (primarily, gender and age) on worldwide, lifetime movie gross of some of the most successful movies of all time. [Historically](https://womenintvfilm.sdsu.edu/research/), female protagonists&mdash;particularly, older/middle-aged female protagonists&mdash;are significantly underrepresented in movies. Here, I aim to determine what (if any) impact these differences in actor demographics (i.e., gender and age) have on the lifetime gross of a movie.
-
-This will allow people a high-risk for heat-illness (e.g., adults over the age of 65, people with existing health conditions) to make more informed decisions about which MTA stations to avoid to maintain their personal health. I compared [subway turnstile data](http://web.mta.info/developers/turnstile.html) provided by the MTA with corresponding surface temperature data collected by the [NASA Landsat 8 satellite](https://landsat.gsfc.nasa.gov/landsat-8/landsat-8-overview) to create a heat-illness risk index for subway stations in the MTA system. After determining the highest heat-illness risk stations, I built an interactive Tableau dashboard to visualize and publicize these results.
+The goal of this project was to determine the impact of lead-actor demographics (specifically, gender and age) on worldwide, lifetime movie gross of some of the most successful movies of all time. [Historically](https://womenintvfilm.sdsu.edu/research/), female protagonists&mdash;particularly, female protagonists portrayed by actors over the age of ~35&mdash;are significantly underrepresented in movies; here, I aim to determine what (if any) impact these differences in actor demographics (i.e., gender and age) have on the lifetime gross of a movie. To do so, I build a ridge regression model that uses as features the domestic opening weekend gross (and its square), budget, the Rotten Tomatoes audience and Tomatometer scores, the lead actor gender and age, the studio that produced the movie, and the genre of the movie to predict the worldwide, lifetime gross of a movie. Scored on the test data, the resulting model has an R<sup>2</sup> = 0.795 and a mean absolute error of $63.4 million. The significant features in the model (i.e., those coefficients with _p_-values < 0.01) are the domestic opening weekend gross (and its square), budget, the Rotten Tomatoes audience and Tomatometer scores, and whether the movie falls into one of the following genre categories: adventure, animation, or sci-fi. Of note, the lead actor gender and age do not have a significant impact on predicting lifetime movie gross.
 
 
 ### Design
