@@ -22,7 +22,7 @@ From [Box Office Mojo](https://www.boxofficemojo.com/chart/ww_top_lifetime_gross
 Given the name for the lead-actor of each movie, I also scrape from the actor's IMDb webpage a basic bio, including their birth date, height, and gender. Their birth dates will be used (along with the release date of each movie) to calculate their age at the time of release.
 
 #### Rotten Tomatoes
-Given the title of each movie, I also scrape the audience score and Tomatometer score from [Rotten Tomatoes](https://www.rottentomatoes.com)
+Given the title of each movie, I also scrape the audience score and Tomatometer score from [Rotten Tomatoes](https://www.rottentomatoes.com).
 
 ### Data Summary
 For each movie (i.e., an individual sample of analysis), our dataset will therefore include:
@@ -40,13 +40,13 @@ At this stage, I engineer a few features&mdash;including the age of the lead act
 To determine a baseline, I fit simple linear, polynomial, ridge, and LASSO regression models utilizing the domestic opening gross (and its square), budget, and Rotten Tomatoes scores as features. The polynomial model performs poorly relative to the other models; the linear, ridge, and LASSO models all tend to overfit the training data, so it is important to select a model with regularization to minimize overfitting. Between ridge and LASSO, I select the ridge model because we do not want to zero the feature coefficients for any of the features of interest (i.e., lead actor gender and age), even if those features have low significance. The model will be trained and cross-validated on 80% of the data (60%&ndash;20% split between the training and validation sets), and tested on the remaining 20% of the data.
 
 #### Expanded model
-To expand the model, I add lead actor gender and age as features, as well as dummy variables for the studio that produced the movie and the genre of the movie. The final model (fit to the combined training and validation data) has a hyperparameter &alpha; = 14.5, and an R<sup>2</sup> = 0.795 and MAE = $63.4 million.
+To expand the model, I add lead actor gender and age as features, as well as dummy variables for the studio that produced the movie and the genre of the movie. The final model (fit to the combined training and validation data) has a regularization hyperparameter &alpha; = 14.5, and an R<sup>2</sup> = 0.795 and MAE = $63.4 million.
 
 
 #### Interpretation
 The significant coefficients in the final model (_p_ < 0.01) are the domestic opening weekend gross (and its square), budget, the Rotten Tomatoes audience and Tomatometer scores, and whether the movie falls into one of the following genre categories: adventure, animation, or sci-fi. Though the lead actor gender has a negative coefficient (i.e., the lifetime movie gross decreases for female leads) in the final model, the coefficients for both lead actor gender and age are not significantly different from a coefficient of 0. That is, the gender and age of the lead actor has no significant impact on predicting the worldwide, lifetime gross of a movie.
 
-The figure below shows the relative feature (coefficient) importance of the significant features (_p_ < 0.01) in the final model, as well as the lead actor gender and age.
+The figure below shows the relative feature (coefficient) importance of the significant features (_p_ < 0.01) in the final model, as well as the lead actor gender and age (both of which have _p_ > 0.01).
 
 <p align="center">
 <img src="https://github.com/hmlewis-astro/imdb_movie_gross/blob/main/figures/ridge_final_coef_studio_genre_trim_significant_include_demographics.png" width="600" />
@@ -60,4 +60,4 @@ The figure below shows the relative feature (coefficient) importance of the sign
 
 ### Communication
 
-In addition to the slides and visuals presented here, an expanded version of this write-up will be included as a blog post on my GitHub Pages [website](https://hmlewis-astro.github.io/).
+In addition to the slides and visuals presented here, an expanded version of this write-up will be included as a blog post on my GitHub Pages website.
